@@ -1,0 +1,108 @@
+//Estrutura de um código basico em CPP com algumas das funções básicas sempre utilizadas, como função menu, função imprissao, função de lista, etc.
+
+// Inclui bibliotecas
+#include <iostream>
+#define MAX 3
+
+
+//1 - Define struct e cria datatype
+
+typedef struct Spilha {
+    int elemento[MAX];
+    int topo; //controlador da pilha
+} Tpilha;
+
+
+//2 - Função menu
+
+int menu(){
+    int op;
+    system("cls");
+    printf("* * * * OPÇÕES * * * *\n\n");
+    printf("\n1 - PUSH");
+    printf("\n2 - POP");
+    printf("\n3 - IMPRIMIR");
+    printf("\n9 - ENCERRAR");
+    printf("\n\nDigite sua opcao: ");
+    scanf("%d", &op);
+    return op;
+}
+
+
+//3 - Função imprimir
+
+void imprime(Tpilha p){
+
+    int i;
+    system("cls");
+    printf("* * * * PILHA * * * *\n\n");
+    for (i = p.topo; i>=0;i--)
+        printf("%d\n",p.elemento[i]);
+    printf("\n\n\n");
+    system("pause");
+}
+
+//4- Função PUSH (acrescenta)
+
+void push(Tpilha *p, int e)
+{
+    if(p->topo<=(MAX-2))
+    {
+        p->topo = p->topo+1;
+        p->elemento[p->topo] = e;
+        printf("\n\nElemento inserido com sucesso!\n");
+    } else
+        printf("\n\nImpossivel inserir, pilha cheia\n\n");
+    system("pause");
+}
+
+
+//5 - Função POP (remove ultimo inserido)
+
+void pop(Tpilha *p){
+
+    if(p->topo >=0){
+        p->topo = p->topo - 1;
+        printf("\n\nElemento removido com sucesso!\n\n");
+
+    }else
+        printf("\n\nImpossivel remover, pilha vazia!\n\n");
+    system("pause");
+}
+
+
+int main()
+{
+
+    Tpilha pilha;
+    int opcao, elemento;
+    pilha.topo = -1;
+    do
+    {
+      opcao = menu();
+
+      switch(opcao)
+      {
+        case 1: //push
+                system("cls");
+                printf("* * * * PUSH * * * *\n\n");
+                printf("Informe o elemento a ser inserido na pilha: ");
+                scanf("%d",&elemento);
+                push(&pilha, elemento);
+                break;
+
+        case 2: //pop
+                system("cls");
+                printf("* * * * POP * * * *\n\n");
+                pop(&pilha);
+                break;
+
+
+        case 3: //imprimir
+                imprime(pilha);
+                break;
+        }
+    }while(opcao!=9);
+
+    return 0;
+}
